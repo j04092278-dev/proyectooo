@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla 3x4 con Celda Combinada</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 500px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+        td {
+            border: 2px solid #333;
+            width: 120px;
+            height: 70px;
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px;
+        }
+        .combined {
+            background-color: #e6f7ff;
+            font-weight: bold;
+        }
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tabla 3x4 con Celda Combinada</h1>
+        <p>La primera celda combina 3 filas verticalmente</p>
+        
+        <table>
+            <tr>
+                <td rowspan="3" class="combined">Celda combinada (3 filas)</td>
+                <td>Fila 1, Col 2</td>
+                <td>Fila 1, Col 3</td>
+                <td>Fila 1, Col 4</td>
+            </tr>
+            <tr>
+                <td>Fila 2, Col 2</td>
+                <td>Fila 2, Col 3</td>
+                <td>Fila 2, Col 4</td>
+            </tr>
+            <tr>
+                <td>Fila 3, Col 2</td>
+                <td>Fila 3, Col 3</td>
+                <td>Fila 3, Col 4</td>
+            </tr>
+        </table>
+        
+        <div style="margin-top: 20px; text-align: left; background: #f0f8ff; padding: 15px; border-radius: 5px;">
+            <p><strong>Estructura de la tabla:</strong></p>
+            <ul>
+                <li><strong>3 filas</strong> × <strong>4 columnas</strong></li>
+                <li>Celda combinada con <code>rowspan="3"</code></li>
+                <li>La celda combinada ocupa la primera columna de las filas 1, 2 y 3</li>
+            </ul>
+        </div>
+    </div>
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla 3x2 con Una Celda Combinada</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 400px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+        td {
+            border: 2px solid #333;
+            height: 80px;
+            text-align: center;
+            vertical-align: middle;
+            padding: 15px;
+        }
+        .combined {
+            background-color: #e6f7ff;
+            font-weight: bold;
+        }
+        .normal-cell {
+            background-color: #f9f9f9;
+        }
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tabla 3x2 con Una Celda Combinada</h1>
+        <p>Solo la primera fila tiene celdas combinadas, las demás están normales</p>
+        
+        <table>
+            <!-- Primera fila con celda que combina 2 columnas -->
+            <tr>
+                <td colspan="2" class="combined">Fila 1 - Celda combinada (2 columnas)</td>
+            </tr>
+            <!-- Segunda fila con celdas normales -->
+            <tr>
+                <td class="normal-cell">Fila 2, Col 1</td>
+                <td class="normal-cell">Fila 2, Col 2</td>
+            </tr>
+            <!-- Tercera fila con celdas normales -->
+            <tr>
+                <td class="normal-cell">Fila 3, Col 1</td>
+                <td class="normal-cell">Fila 3, Col 2</td>
+            </tr>
+        </table>
+
+        <div class="code-example">
+            <p><strong>Código HTML utilizado:</strong></p>
+            <pre>
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td colspan="2"&gt;Fila 1 - Celda combinada&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Fila 2, Col 1&lt;/td&gt;
+        &lt;td&gt;Fila 2, Col 2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Fila 3, Col 1&lt;/td&gt;
+        &lt;td&gt;Fila 3, Col 2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+            </pre>
+        </div>
+
+        <div style="margin-top: 20px; text-align: left; background: #f0f8ff; padding: 15px; border-radius: 5px;">
+            <p><strong>Características de la tabla:</strong></p>
+            <ul>
+                <li><strong>Estructura:</strong> 3 filas × 2 columnas</li>
+                <li><strong>Celda combinada:</strong> Solo la primera fila usa <code>colspan="2"</code></li>
+                <li><strong>Celdas normales:</strong> Las filas 2 y 3 tienen celdas individuales</li>
+                <li><strong>Visual:</strong> La celda combinada tiene fondo azul para destacar</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

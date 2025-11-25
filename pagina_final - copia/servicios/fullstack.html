@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Desarrollo Full-Stack - Proyecto Control de Dispositivos por Gestos Articulados">
+    <title>Desarrollo Full-Stack - Control por Gestos | Systems Inovations</title>
+    <link rel="stylesheet" href="../index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">Systems Inovations</a>
+            <nav>
+                <a href="#proyecto-gestos">Proyecto Gestos</a>
+                <a href="#arquitectura">Arquitectura</a>
+                <a href="#tecnologias">Tecnologías</a>
+                <a href="../index.html">Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero-servicio">
+        <div class="hero-content">
+            <h1>Desarrollo de casa inteligente </h1>
+            <p>proyecto integrador</p>
+        </div>
+    </section>
+
+    <section id="descripcion-servicio">
+        <div class="container">
+            <div class="servicio-content">
+                <div class="servicio-texto">
+                    <h2>Integración <span class="color-acento">Completa</span> de Sistemas</h2>
+                    <p>Nuestro enfoque full-stack nos permite desarrollar soluciones que abarcan desde la interfaz de usuario hasta los sistemas embebidos, creando aplicaciones robustas y escalables.</p>
+                    <p>Combinamos tecnologías modernas de desarrollo web con sistemas de hardware para ofrecer soluciones innovadoras que conectan el mundo digital con el físico.</p>
+                </div>
+                <div class="servicio-imagen">
+                    <div class="img-container"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyecto-gestos">
+        <div class="container">
+            <div class="project-highlight">
+                <h2>Proyecto Destacado: Control de Dispositivos por Gestos Articulados</h2>
+                <p>Sistema de domótica inteligente controlado por reconocimiento de gestos manuales</p>
+            </div>
+            
+            <div class="project-details">
+                <div class="detail-card">
+                    <h3>Descripción del Proyecto</h3>
+                    <p>Desarrollamos un sistema innovador de control por gestos que permite manejar dispositivos domésticos mediante movimientos naturales de las manos. El sistema combina visión artificial, procesamiento en tiempo real y control de hardware.</p>
+                    <p>Utilizando una cámara web y algoritmos de machine learning, el sistema detecta gestos específicos y los traduce en comandos para controlar luces, ventiladores, alarmas y mecanismos de apertura.</p>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>Objetivos Principales</h3>
+                    <ul>
+                        <li>Crear un sistema de control intuitivo sin contacto físico</li>
+                        <li>Integrar visión artificial con sistemas embebidos</li>
+                        <li>Desarrollar una interfaz gráfica en tiempo real</li>
+                        <li>Implementar control preciso de múltiples dispositivos</li>
+                        <li>Facilitar la accesibilidad para usuarios con movilidad reducida</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="morse-chart">
+                <h3>Tabla de Gestos y Comandos</h3>
+                <div class="gestos-table">
+                    <div class="gesto-item">
+                        <span class="gesto-icon">👊</span>
+                        <strong>Puño cerrado (00000):</strong> ALL_OFF - Apaga todos los dispositivos
+                    </div>
+                    <div class="gesto-item">
+                        <span class="gesto-icon">✋</span>
+                        <strong>Mano abierta (11111):</strong> LED_ON - Enciende las luces
+                    </div>
+                    <div class="gesto-item">
+                        <span class="gesto-icon">✌️</span>
+                        <strong>Paz y amor (01100):</strong> FAN_ON - Activa el ventilador
+                    </div>
+                    <div class="gesto-item">
+                        <span class="gesto-icon">👍</span>
+                        <strong>Pulgar arriba (10000):</strong> BUZZER_ON - Activa la alarma
+                    </div>
+                    <div class="gesto-item">
+                        <span class="gesto-icon">🤟</span>
+                        <strong>Tres dedos (00111):</strong> DOOR_OPEN - Abre la puerta (180°)
+                    </div>
+                    <div class="gesto-item">
+                        <span class="gesto-icon">👈</span>
+                        <strong>Solo meñique (00001):</strong> DOOR_CLOSE - Cierra la puerta (0°)
+                    </div>
+                    <div class="gesto-item">
+                        <span class="gesto-icon">☝️</span>
+                        <strong>Solo índice (01000):</strong> DOOR_SET_ANGLE=90 - Ángulo medio (90°)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="arquitectura">
+        <div class="container">
+            <h2>Arquitectura <span class="color-acento">del Sistema</span></h2>
+            
+            <div class="project-details">
+                <div class="detail-card">
+                    <h3>Componentes del Sistema</h3>
+                    <div class="system-architecture">
+                        <div class="arch-layer">
+                            <h4>🔍 Capa de Detección</h4>
+                            <ul>
+                                <li>Cámara web para captura de video</li>
+                                <li>MediaPipe Hands para tracking de manos</li>
+                                <li>Algoritmos de reconocimiento de gestos</li>
+                            </ul>
+                        </div>
+                        <div class="arch-layer">
+                            <h4>💻 Capa de Procesamiento</h4>
+                            <ul>
+                                <li>Python con OpenCV y Pygame</li>
+                                <li>Interfaz gráfica en tiempo real</li>
+                                <li>Comunicación serial con Arduino</li>
+                            </ul>
+                        </div>
+                        <div class="arch-layer">
+                            <h4>⚡ Capa de Control</h4>
+                            <ul>
+                                <li>Arduino UNO como controlador principal</li>
+                                <li>Servomotores para movimiento preciso</li>
+                                <li>Drivers L298N para control de motores</li>
+                            </ul>
+                        </div>
+                        <div class="arch-layer">
+                            <h4>💡 Capa de Actuadores</h4>
+                            <ul>
+                                <li>LEDs para iluminación</li>
+                                <li>Ventilador DC con control de velocidad</li>
+                                <li>Buzzer para alertas audibles</li>
+                                <li>Servo para mecanismo de puerta</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>Flujo de Datos</h3>
+                    <div class="data-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Captura de Gestos</h4>
+                                <p>La cámara captura los movimientos de la mano en tiempo real</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Procesamiento en Python</h4>
+                                <p>MediaPipe analiza los puntos clave de la mano y detecta gestos</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Generación de Comandos</h4>
+                                <p>Los gestos se mapean a comandos específicos para los dispositivos</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Comunicación Serial</h4>
+                                <p>Python envía los comandos vía USB al Arduino</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Ejecución en Arduino</h4>
+                                <p>El microcontrolador activa los dispositivos correspondientes</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <h4>Retroalimentación Visual</h4>
+                                <p>La interfaz muestra el estado actual de todos los dispositivos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <h4>Diagrama de Arquitectura del Sistema</h4>
+                    <img src="../images/gestos-architecture.png" alt="Arquitectura del sistema de control por gestos" onerror="this.style.display='none'">
+                    <p>Flujo completo de datos y control</p>
+                </div>
+                
+                <div class="gallery-item">
+                    <h4>Interfaz Gráfica del Sistema</h4>
+                    <img src="../images/gestos-interface.png" alt="Interfaz gráfica del control por gestos" onerror="this.style.display='none'">
+                    <p>Panel de control en tiempo real desarrollado con Pygame</p>
+                </div>
+                
+                <div class="gallery-item">
+                    <h4>Esquema del Circuito</h4>
+                    <img src="../images/gestos-circuit.png" alt="Esquema del circuito Arduino" onerror="this.style.display='none'">
+                    <p>Configuración de componentes electrónicos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tecnologias">
+        <div class="container">
+            <h2>Tecnologías <span class="color-acento">Implementadas</span></h2>
+            
+            <h3>Stack Tecnológico Completo</h3>
+            <div class="tech-stack">
+                <div class="tech-item">Python 3.x</div>
+                <div class="tech-item">OpenCV</div>
+                <div class="tech-item">MediaPipe</div>
+                <div class="tech-item">Pygame</div>
+                <div class="tech-item">Arduino (C++)</div>
+                <div class="tech-item">Serial Communication</div>
+                <div class="tech-item">Servo Library</div>
+                <div class="tech-item">L298N Driver</div>
+            </div>
+            
+            <div class="project-details">
+                <div class="detail-card">
+                    <h3>Componentes Hardware Utilizados</h3>
+                    <div class="hardware-grid">
+                        <div class="hardware-item">
+                            <h4>🖥️ Computadora</h4>
+                            <p>Procesamiento principal y interfaz gráfica</p>
+                        </div>
+                        <div class="hardware-item">
+                            <h4>📷 Cámara Web</h4>
+                            <p>Captura de gestos en tiempo real</p>
+                        </div>
+                        <div class="hardware-item">
+                            <h4>⚙️ Arduino UNO</h4>
+                            <p>Controlador principal de dispositivos</p>
+                        </div>
+                        <div class="hardware-item">
+                            <h4>🔌 Servomotor SG90</h4>
+                            <p>Control preciso de posición para puertas</p>
+                        </div>
+                        <div class="hardware-item">
+                            <h4>🌀 Ventilador DC</h4>
+                            <p>Control de velocidad y dirección</p>
+                        </div>
+                        <div class="hardware-item">
+                            <h4>💡 LEDs</h4>
+                            <p>Indicadores visuales y iluminación</p>
+                        </div>
+                        <div class="hardware-item">
+                            <h4>🚨 Buzzer</h4>
+                            <p>Alertas audibles y alarmas</p>
+                        </div>
+                        <div class="hardware-item">
+                            <h4>🔋 Fuente de Poder</h4>
+                            <p>Alimentación del sistema (9V)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>Características Técnicas</h3>
+                    <ul>
+                        <li><strong>Detección en tiempo real:</strong> 30 FPS de procesamiento</li>
+                        <li><strong>Precisión de gestos:</strong> 95% de efectividad en condiciones óptimas</li>
+                        <li><strong>Latencia:</strong> Menos de 100ms entre gesto y acción</li>
+                        <li><strong>Control de servo:</strong> Resolución de 1° (0-180°)</li>
+                        <li><strong>Control de ventilador:</strong> PWM de 8 bits (0-255)</li>
+                        <li><strong>Comunicación:</strong> Serial a 9600 baudios</li>
+                        <li><strong>Interfaz:</strong> Gráfica en tiempo real con retroalimentación</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="aplicaciones">
+        <div class="container">
+            <h2>Aplicaciones <span class="color-acento">Prácticas</span></h2>
+            
+            <div class="project-details">
+                <div class="detail-card">
+                    <h3>🧠 Domótica Inteligente</h3>
+                    <p>Control intuitivo de dispositivos del hogar mediante gestos naturales, eliminando la necesidad de interruptores físicos o controles remotos.</p>
+                    <ul>
+                        <li>Encendido/apagado de luces</li>
+                        <li>Control de ventilación</li>
+                        <li>Apertura automatizada de puertas</li>
+                        <li>Sistema de alertas audibles</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>♿ Accesibilidad</h3>
+                    <p>Solución ideal para personas con movilidad reducida o discapacidades que dificultan el uso de interfaces tradicionales.</p>
+                    <ul>
+                        <li>Control sin contacto físico</li>
+                        <li>Interfaces adaptativas</li>
+                        <li>Gestos personalizables</li>
+                        <li>Retroalimentación multimodal</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="project-details">
+                <div class="detail-card">
+                    <h3>🏥 Ámbito Médico</h3>
+                    <p>Aplicaciones en entornos hospitalarios y de rehabilitación donde el control sin contacto es esencial para la higiene.</p>
+                    <ul>
+                        <li>Control de equipamiento médico</li>
+                        <li>Interfaces para quirófanos</li>
+                        <li>Herramientas de rehabilitación</li>
+                        <li>Entornos estériles</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>🎓 Educación Tecnológica</h3>
+                    <p>Plataforma educativa para enseñanza de visión artificial, sistemas embebidos e interfaces humano-máquina.</p>
+                    <ul>
+                        <li>Laboratorios de robótica</li>
+                        <li>Cursos de inteligencia artificial</li>
+                        <li>Talleres de domótica</li>
+                        <li>Investigación en HCI</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proceso">
+        <div class="container">
+            <h2>Metodología de <span class="color-acento">Desarrollo</span></h2>
+            <div class="proceso-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Análisis de Requerimientos</h3>
+                    <p>Identificación de gestos, dispositivos a controlar y especificaciones técnicas del sistema completo.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Diseño de Arquitectura</h3>
+                    <p>Planificación de la integración entre software de visión artificial y hardware embebido.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Desarrollo por Capas</h3>
+                    <p>Implementación independiente de detección, procesamiento, control y actuación.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Integración y Pruebas</h3>
+                    <p>Conectividad entre Python y Arduino, validación de gestos y respuesta de dispositivos.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Optimización y Documentación</h3>
+                    <p>Mejora de rendimiento, interfaz de usuario y documentación técnica completa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyectos">
+        <div class="container">
+            <h2>Proyectos <span class="color-acento">Full-Stack</span></h2>
+            <div class="proyectos-grid">
+                <div class="proyecto-card">
+                    <div class="proyecto-imagen"></div>
+                    <h3>Sistema de Domótica por Gestos</h3>
+                    <p>Control completo de dispositivos domésticos mediante reconocimiento de gestos manuales en tiempo real.</p>
+                </div>
+                <div class="proyecto-card">
+                    <div class="proyecto-imagen"></div>
+                    <h3>Plataforma IoT Industrial</h3>
+                    <p>Sistema de monitoreo y control industrial con dashboard en tiempo real y alertas automáticas.</p>
+                </div>
+                <div class="proyecto-card">
+                    <div class="proyecto-imagen"></div>
+                    <h3>Aplicación de Telemedicina</h3>
+                    <p>Plataforma completa para consultas médicas remotas con historial clínico y videollamadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta-servicio">
+        <div class="container">
+            <h2>¿Necesitas una solución full-stack?</h2>
+            <p>Desarrollamos sistemas integrados que conectan software moderno con hardware especializado</p>
+            <a href="../contacto.html"><button>Consultar Proyecto</button></a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="../index.html" class="logo">Systems Inovations</a>
+                <div class="footer-info">
+                    <p>Email: info@systemsinovations.com</p>
+                    <p>Teléfono: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <p class="copyright">&copy; Systems Inovations 2025 - Todos los derechos reservados</p>
+        </div>
+    </footer>
+</body>
+</html>

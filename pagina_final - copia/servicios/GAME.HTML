@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carreras 3D Extremo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 2px solid #333;
+            box-shadow: 0 0 20px rgba(0, 120, 255, 0.3);
+        }
+        .game-container {
+            text-align: center;
+        }
+        h1 {
+            color: #ff4444;
+            text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>CARRERAS 3D EXTREMO</h1>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </div>
+
+    <script>
+        // Configuración del juego
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Colores
+        const SKY_BLUE = 'rgb(135, 206, 235)';
+        const ROAD_COLOR = 'rgb(50, 50, 50)';
+        const ROAD_MARKING = 'rgb(255, 255, 255)';
+        const GRASS_COLOR = 'rgb(34, 139, 34)';
+        const RED = 'rgb(255, 0, 0)';
+        const BLUE = 'rgb(0, 120, 255)';
+        const YELLOW = 'rgb(255, 215, 0)';
+        const BLACK = 'rgb(0, 0, 0)';
+        const WHITE = 'rgb(255, 255, 255)';
+
+        // Clase para el jugador
+        class PlayerCar {
+            constructor() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height - 100;
+                this.width = 40;
+                this.height = 70;
+                this.speed = 0;
+                this.maxSpeed = 10;
+                this.acceleration = 0.1;
+                this.deceleration = 0.2;
+                this.steering = 0;
+                this.maxSteering = 3;
+                this.color = RED;
+                this.score = 0;
+                this.lives = 3;
+            }
+
+            update(keys) {
+                // Aceleración y frenado
+                if (keys.ArrowUp) {
+                    this.speed = Math.min(this.speed + this.acceleration, this.maxSpeed);
+                } else if (keys.ArrowDown) {
+                    this.speed = Math.max(this.speed - this.deceleration * 2, -this.maxSpeed / 2);
+                } else {
+                    // Desaceleración natural
+                    if (this.speed > 0) {
+                        this.speed = Math.max(this.speed - this.deceleration / 2, 0);
+                    } else if (this.speed < 0) {
+                        this.speed = Math.min(this.speed + this.deceleration / 2, 0);
+                    }
+                }
+
+                // Dirección
+                if (keys.ArrowLeft) {
+                    this.steering = -this.maxSteering;
+                } else if (keys.ArrowRight) {
+                    this.steering = this.maxSteering;
+                } else {
+                    this.steering = 0;
+                }
+
+                // Movimiento
+                this.x += this.steering * (this.speed / this.maxSpeed);
+
+                // Limitar el coche a la carretera
+                const roadLeft = canvas.width / 2 - 150;
+                const roadRight = canvas.width / 2 + 150;
+                this.x = Math.max(roadLeft + this.width / 2, Math.min(this.x, roadRight - this.width / 2));
+            }
+
+            draw() {
+                // Dibujar el coche del jugador
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+
+                // Detalles del coche
+                ctx.fillStyle = BLACK;
+                ctx.fillRect(this.x - this.width / 2 + 5, this.y - this.height / 2 + 5, this.width - 10, 15); // Ventana frontal
+                ctx.fillRect(this.x - this.width / 2 + 5, this.y + this.height / 2 - 20, this.width - 10, 15); // Ventana trasera
+                
+                ctx.fillStyle = YELLOW;
+                ctx.fillRect(this.x - this.width / 2 - 5, this.y - this.height / 2 + 10, 5, 10); // Luz izquierda
+                ctx.fillRect(this.x + this.width / 2, this.y - this.height / 2 + 10, 5, 10); // Luz derecha
+                
+                ctx.fillStyle = RED;
+                ctx.fillRect(this.x - this.width / 2 - 5, this.y + this.height / 2 - 20, 5, 10); // Luz trasera izquierda
+                ctx.fillRect(this.x + this.width / 2, this.y + this.height / 2 - 20, 5, 10); // Luz trasera derecha
+            }
+        }
+
+        // Clase para los coches enemigos
+        class EnemyCar {
+            constructor() {
+                this.width = 40;
+                this.height = 70;
+                this.lane = Math.floor(Math.random() * 3) - 1; // -1: izquierda, 0: centro, 1: derecha
+                this.x = canvas.width / 2 + this.lane * 50;
+                this.y = -this.height;
+                this.speed = Math.random() * 4 + 3;
+                this.colors = [BLUE, 'rgb(0, 200, 0)', 'rgb(200, 0, 200)', 'rgb(255, 165, 0)'];
+                this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+            }
+
+            update() {
+                this.y += this.speed;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+
+                // Detalles del coche enemigo
+                ctx.fillStyle = BLACK;
+                ctx.fillRect(this.x - this.width / 2 + 5, this.y - this.height / 2 + 5, this.width - 10, 15);
+                ctx.fillRect(this.x - this.width / 2 + 5, this.y + this.height / 2 - 20, this.width - 10, 15);
+            }
+        }
+
+        // Clase para efectos de partículas
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = Math.random() * 4 - 2;
+                this.vy = Math.random() * 4 - 2;
+                this.life = Math.floor(Math.random() * 20) + 20;
+                this.colors = [WHITE, YELLOW, 'rgb(200, 200, 200)'];
+                this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life--;
+            }
+
+            draw() {
+                const alpha = Math.min(1, this.life / 40);
+                const size = Math.max(1, this.life / 10);
+                
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Clase para elementos de la carretera
+        class RoadElement {
+            constructor(y) {
+                this.y = y;
+                this.width = 10;
+                this.height = 30;
+            }
+
+            update(speed) {
+                this.y += speed;
+            }
+
+            draw() {
+                ctx.fillStyle = ROAD_MARKING;
+                ctx.fillRect(canvas.width / 2 - this.width / 2, this.y, this.width, this.height);
+            }
+        }
+
+        // Función para dibujar la carretera en perspectiva 3D
+        function drawRoad(playerSpeed) {
+            // Dibujar cielo
+            ctx.fillStyle = SKY_BLUE;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar pasto
+            ctx.fillStyle = GRASS_COLOR;
+            ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
+
+            // Dibujar carretera con perspectiva
+            const roadWidth = 300;
+            const roadTopWidth = 100;
+
+            ctx.fillStyle = ROAD_COLOR;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2 - roadTopWidth / 2, 0);
+            ctx.lineTo(canvas.width / 2 + roadTopWidth / 2, 0);
+            ctx.lineTo(canvas.width / 2 + roadWidth / 2, canvas.height);
+            ctx.lineTo(canvas.width / 2 - roadWidth / 2, canvas.height);
+            ctx.closePath();
+            ctx.fill();
+
+            // Dibujar líneas de la carretera
+            const lineHeight = 50;
+            const lineSpacing = 100;
+            const lineWidth = 10;
+
+            for (let i = 0; i < canvas.height; i += lineSpacing) {
+                const yPos = (i - Date.now() / 10 % lineSpacing) % canvas.height;
+                
+                ctx.fillStyle = ROAD_MARKING;
+                ctx.beginPath();
+                ctx.moveTo(canvas.width / 2 - lineWidth / 2, yPos);
+                ctx.lineTo(canvas.width / 2 - lineWidth / 2, yPos + lineHeight);
+                ctx.lineTo(canvas.width / 2 + lineWidth / 2, yPos + lineHeight);
+                ctx.lineTo(canvas.width / 2 + lineWidth / 2, yPos);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        // Función para mostrar información en pantalla
+        function drawHUD(player) {
+            ctx.font = '24px Arial';
+            ctx.fillStyle = WHITE;
+            ctx.textAlign = 'left';
+
+            // Velocidad
+            ctx.fillText(`Velocidad: ${Math.abs(Math.floor(player.speed * 20))} km/h`, 20, 30);
+
+            // Puntuación
+            ctx.fillText(`Puntos: ${player.score}`, 20, 60);
+
+            // Vidas
+            ctx.fillText(`Vidas: ${player.lives}`, 20, 90);
+
+            // Instrucciones
+            ctx.font = '16px Arial';
+            const instructions = [
+                "Flechas: Mover coche",
+                "Espacio: Turbo (cuando disponible)",
+                "R: Reiniciar juego"
+            ];
+
+            instructions.forEach((instruction, index) => {
+                ctx.fillText(instruction, canvas.width - 200, 30 + index * 25);
+            });
+        }
+
+        // Variables del juego
+        let player = new PlayerCar();
+        let enemyCars = [];
+        let particles = [];
+        let roadElements = [];
+        let spawnTimer = 0;
+        let gameOver = false;
+        let turboAvailable = true;
+        let turboTimer = 0;
+
+        // Crear elementos de la carretera
+        for (let i = 0; i < canvas.height; i += 100) {
+            roadElements.push(new RoadElement(i));
+        }
+
+        // Control de teclado
+        const keys = {
+            ArrowUp: false,
+            ArrowDown: false,
+            ArrowLeft: false,
+            ArrowRight: false,
+            Space: false,
+            KeyR: false
+        };
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code in keys) {
+                keys[e.code] = true;
+            }
+
+            if (e.code === 'Space' && turboAvailable && !gameOver) {
+                player.speed = player.maxSpeed * 1.5;
+                turboAvailable = false;
+                turboTimer = Date.now();
+
+                // Crear partículas de turbo
+                for (let i = 0; i < 30; i++) {
+                    particles.push(new Particle(player.x, player.y + player.height / 2));
+                }
+                e.preventDefault();
+            }
+
+            if (e.code === 'KeyR' && gameOver) {
+                resetGame();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.code in keys) {
+                keys[e.code] = false;
+            }
+        });
+
+        // Función para reiniciar el juego
+        function resetGame() {
+            player = new PlayerCar();
+            enemyCars = [];
+            particles = [];
+            roadElements = [];
+            for (let i = 0; i < canvas.height; i += 100) {
+                roadElements.push(new RoadElement(i));
+            }
+            gameOver = false;
+            turboAvailable = true;
+            spawnTimer = 0;
+        }
+
+        // Bucle principal del juego
+        function gameLoop() {
+            // Limpiar canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!gameOver) {
+                // Actualizar jugador
+                player.update(keys);
+
+                // Generar coches enemigos
+                spawnTimer++;
+                if (spawnTimer >= 60) {
+                    enemyCars.push(new EnemyCar());
+                    spawnTimer = 0;
+                }
+
+                // Actualizar coches enemigos
+                for (let i = enemyCars.length - 1; i >= 0; i--) {
+                    const enemy = enemyCars[i];
+                    enemy.update();
+
+                    // Verificar colisiones
+                    if (Math.abs(player.x - enemy.x) < (player.width + enemy.width) / 2 &&
+                        Math.abs(player.y - enemy.y) < (player.height + enemy.height) / 2) {
+                        player.lives--;
+                        enemyCars.splice(i, 1);
+
+                        // Crear partículas de explosión
+                        for (let j = 0; j < 50; j++) {
+                            particles.push(new Particle(enemy.x, enemy.y));
+                        }
+
+                        if (player.lives <= 0) {
+                            gameOver = true;
+                        }
+                    }
+                    // Eliminar coches que salen de la pantalla
+                    else if (enemy.y > canvas.height + enemy.height) {
+                        enemyCars.splice(i, 1);
+                        player.score += 10;
+                    }
+                }
+
+                // Actualizar partículas
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    particles[i].update();
+                    if (particles[i].life <= 0) {
+                        particles.splice(i, 1);
+                    }
+                }
+
+                // Actualizar elementos de la carretera
+                roadElements.forEach(element => {
+                    element.update(player.speed);
+                    if (element.y > canvas.height) {
+                        element.y = -element.height;
+                    }
+                });
+
+                // Recargar turbo después de 5 segundos
+                if (!turboAvailable && Date.now() - turboTimer > 5000) {
+                    turboAvailable = true;
+                }
+            }
+
+            // Dibujar todo
+            drawRoad(player.speed);
+
+            // Dibujar elementos de la carretera
+            roadElements.forEach(element => element.draw());
+
+            // Dibujar coches enemigos
+            enemyCars.forEach(enemy => enemy.draw());
+
+            // Dibujar partículas
+            particles.forEach(particle => particle.draw());
+
+            // Dibujar jugador
+            player.draw();
+
+            // Dibujar HUD
+            drawHUD(player);
+
+            // Mostrar turbo disponible
+            if (turboAvailable && !gameOver) {
+                ctx.font = '24px Arial';
+                ctx.fillStyle = YELLOW;
+                ctx.textAlign = 'center';
+                ctx.fillText('TURBO DISPONIBLE (Espacio)', canvas.width / 2, canvas.height - 20);
+            }
+
+            // Mostrar pantalla de game over
+            if (gameOver) {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.font = '72px Arial';
+                ctx.fillStyle = RED;
+                ctx.textAlign = 'center';
+                ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 50);
+
+                ctx.font = '36px Arial';
+                ctx.fillStyle = WHITE;
+                ctx.fillText(`Puntuación final: ${player.score}`, canvas.width / 2, canvas.height / 2 + 20);
+                ctx.fillText('Presiona R para reiniciar', canvas.width / 2, canvas.height / 2 + 70);
+            }
+
+            // Continuar el bucle
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Iniciar el juego
+        gameLoop();
+    </script>
+</body>
+</html>
