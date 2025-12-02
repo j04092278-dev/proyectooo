@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTU Virtual - Plataforma Educativa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="platform-header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>GTU<span>Virtual</span></h1>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> Cursos</a></li>
+                    <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendario</a></li>
+                    <li><a href="#"><i class="fas fa-tasks"></i> Tareas</a></li>
+                    <li><a href="#"><i class="fas fa-chart-bar"></i> Calificaciones</a></li>
+                    <li>
+                        <a href="../index.html" class="home-btn">
+                            <i class="fas fa-arrow-left"></i>
+                            Volver al Sitio
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar cursos...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-menu user-menu-dropdown">
+                    <div class="user-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Estudiante+GTU&background=0e2a6c&color=fff" alt="Usuario">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Estudiante GTU</span>
+                        <div class="dropdown">
+                            <i class="fas fa-chevron-down"></i>
+                            <div class="dropdown-content">
+                                <a href="#"><i class="fas fa-user"></i> Mi Perfil</a>
+                                <a href="#"><i class="fas fa-cog"></i> Configuración</a>
+                                <a href="#"><i class="fas fa-bell"></i> Notificaciones</a>
+                                <a href="../index.html"><i class="fas fa-external-link-alt"></i> Sitio Principal</a>
+                                <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="platform-container">
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb">
+            <nav class="breadcrumb-nav">
+                <a href="../index.html">
+                    <i class="fas fa-home"></i>
+                    Systems Inovations
+                </a>
+                <span class="separator">/</span>
+                <a href="#">
+                    <i class="fas fa-graduation-cap"></i>
+                    GTU Virtual
+                </a>
+                <span class="separator">/</span>
+                <span class="current">Panel Principal</span>
+            </nav>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="../servicios/frontend.html" class="quick-action-btn">
+                <i class="fas fa-laptop-code"></i>
+                <div class="quick-action-content">
+                    <h4>Desarrollo Frontend</h4>
+                    <p>Ver proyectos de interfaces</p>
+                </div>
+            </a>
+            <a href="../servicios/fullstack.html" class="quick-action-btn">
+                <i class="fas fa-code"></i>
+                <div class="quick-action-content">
+                    <h4>Proyectos FullStack</h4>
+                    <p>Explorar sistemas completos</p>
+                </div>
+            </a>
+            <a href="../contacto.html" class="quick-action-btn">
+                <i class="fas fa-envelope"></i>
+                <div class="quick-action-content">
+                    <h4>Contacto</h4>
+                    <p>Comunícate con nosotros</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="platform-main">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-book-open"></i> Mis Cursos</h3>
+                    <ul class="course-list">
+                        <li>
+                            <i class="fas fa-laptop-code"></i>
+                            <span>Programación Web</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-database"></i>
+                            <span>Bases de Datos</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-calculator"></i>
+                            <span>Matemáticas Discretas</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-network-wired"></i>
+                            <span>Redes de Computadoras</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-line"></i>
+                            <span>Estadística Aplicada</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-calendar-check"></i> Próximas Actividades</h3>
+                    <ul class="activity-list">
+                        <li>
+                            <div class="activity-date">
+                                <span class="day">15</span>
+                                <span class="month">OCT</span>
+                            </div>
+                            <div class="activity-info">
+                                <span class="activity-title">Examen Parcial</span>
+                                <span class="activity-course">Programación Web</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="activity-date">
+                                <span class="day">18</span>
+                                <span class="month">OCT</span>
+                            </div>
+                            <div class="activity-info">
+                                <span class="activity-title">Entrega Proyecto</span>
+                                <span class="activity-course">Bases de Datos</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="activity-date">
+                                <span class="day">22</span>
+                                <span class="month">OCT</span>
+                            </div>
+                            <div class="activity-info">
+                                <span class="activity-title">Presentación</span>
+                                <span class="activity-course">Redes de Computadoras</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Enlaces rápidos al sitio principal -->
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-external-link-alt"></i> Enlaces Rápidos</h3>
+                    <ul class="course-list">
+                        <li>
+                            <i class="fas fa-home"></i>
+                            <a href="../index.html" style="color: inherit; text-decoration: none;">Inicio Systems Inovations</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-code"></i>
+                            <a href="../servicios/frontend.html" style="color: inherit; text-decoration: none;">Proyecto Morse</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-robot"></i>
+                            <a href="../servicios/fullstack.html" style="color: inherit; text-decoration: none;">Control por Gestos</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="../contacto.html" style="color: inherit; text-decoration: none;">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <section class="content">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="welcome-text">
+                        <h2>¡Bienvenido a GTU Virtual!</h2>
+                        <p>Plataforma educativa desarrollada con Python y tecnologías modernas</p>
+                    </div>
+                    <div class="welcome-stats">
+                        <div class="stat">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Cursos Activos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Tareas Pendientes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Días hasta exámenes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Courses Grid -->
+                <div class="section-title">
+                    <h3>Mis Cursos en Progreso</h3>
+                    <a href="#" class="view-all">Ver todos los cursos <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="courses-grid">
+                    <div class="course-card">
+                        <div class="course-header" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
+                            <i class="fas fa-laptop-code"></i>
+                            <h4>Programación Web</h4>
+                        </div>
+                        <div class="course-info">
+                            <p>Desarrollo de aplicaciones web modernas utilizando las últimas tecnologías del frontend y backend.</p>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 65%;"></div>
+                                </div>
+                                <span>65% Completado</span>
+                            </div>
+                            <div class="course-actions">
+                                <button class="btn-primary">Continuar Aprendiendo</button>
+                                <button class="btn-secondary">Ver Contenido</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-header" style="background: linear-gradient(135deg, #10b981, #047857);">
+                            <i class="fas fa-database"></i>
+                            <h4>Bases de Datos</h4>
+                        </div>
+                        <div class="course-info">
+                            <p>Diseño e implementación de bases de datos relacionales y no relacionales para aplicaciones modernas.</p>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 40%;"></div>
+                                </div>
+                                <span>40% Completado</span>
+                            </div>
+                            <div class="course-actions">
+                                <button class="btn-primary">Continuar Aprendiendo</button>
+                                <button class="btn-secondary">Ver Contenido</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-header" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                            <i class="fas fa-calculator"></i>
+                            <h4>Matemáticas Discretas</h4>
+                        </div>
+                        <div class="course-info">
+                            <p>Fundamentos matemáticos esenciales para la ciencia de la computación y desarrollo de algoritmos.</p>
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 75%;"></div>
+                                </div>
+                                <span>75% Completado</span>
+                            </div>
+                            <div class="course-actions">
+                                <button class="btn-primary">Continuar Aprendiendo</button>
+                                <button class="btn-secondary">Ver Contenido</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activities -->
+                <div class="section-title">
+                    <h3>Actividad Reciente</h3>
+                </div>
+
+                <div class="activities-timeline">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-file-upload"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Nueva tarea asignada</h4>
+                            <p>Se ha publicado una nueva tarea para el curso de Programación Web sobre desarrollo de interfaces responsivas.</p>
+                            <span class="activity-time">Hace 2 horas</span>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Nuevo mensaje en el foro</h4>
+                            <p>El profesor ha respondido a tu pregunta sobre normalización de bases de datos en el foro de Bases de Datos.</p>
+                            <span class="activity-time">Hace 5 horas</span>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Nueva clase disponible</h4>
+                            <p>Se ha publicado una nueva clase grabada sobre teoría de grafos para Matemáticas Discretas.</p>
+                            <span class="activity-time">Ayer a las 15:30</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Botón flotante para regresar -->
+    <a href="../index.html" class="floating-home-btn" title="Volver al sitio principal">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="platform-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>GTU Virtual</h4>
+                <p>Plataforma de aprendizaje en línea para la comunidad educativa del Grupo Tecnológico Universitario.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/1FVoF53Djz/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/gtutolucaoficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/gtu-oficial-55971b265?utm_source=share_via&utm_content=profile&utm_medium=member_android"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="../index.html"><i class="fas fa-chevron-right"></i> Inicio Principal</a></li>
+                    <li><a href="../servicios/frontend.html"><i class="fas fa-chevron-right"></i> Proyecto Morse</a></li>
+                    <li><a href="../servicios/fullstack.html"><i class="fas fa-chevron-right"></i> Control por Gestos</a></li>
+                    <li><a href="../contacto.html"><i class="fas fa-chevron-right"></i> Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Soporte Técnico</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contactar Soporte</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Reportar Problema</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Información de Contacto</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> Av. Universidad 123, Ciudad GTU</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> soporte@gtuvirtual.edu</li>
+                    <li><i class="fas fa-clock"></i> Lunes a Viernes: 8:00 - 18:00</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GTU Virtual. Todos los derechos reservados. | 
+               <a href="../index.html" style="color: #60a5fa; text-decoration: none;">Systems Inovations</a> | 
+               Plataforma desarrollada con ❤️ para la educación</p>
+        </div>
+    </footer>
+</body>
+</html>
