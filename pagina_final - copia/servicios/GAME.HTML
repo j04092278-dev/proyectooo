@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Carreras 3D Extremo - Móvil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        .game-container {
+            text-align: center;
+            width: 100%;
+            max-width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff4444;
+            text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+            margin: 10px 0;
+            font-size: 1.8rem;
+            padding: 0 10px;
+            flex-shrink: 0;
+        }
+
+        canvas {
+            border: 2px solid #333;
+            box-shadow: 0 0 20px rgba(0, 120, 255, 0.3);
+            width: 100%;
+            max-width: 100vw;
+            height: calc(100vh - 180px);
+            display: block;
+            flex-grow: 1;
+        }
+
+        /* Controles táctiles */
+        .controls-container {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            flex-shrink: 0;
+        }
+
+        .d-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 5px;
+            width: 150px;
+            height: 150px;
+        }
+
+        .control-btn {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #444;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+            user-select: none;
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-btn:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(0.95);
+        }
+
+        .up {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .left {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .center {
+            grid-column: 2;
+            grid-row: 2;
+            background: rgba(50, 50, 50, 0.7);
+            font-size: 18px;
+            padding: 5px;
+        }
+
+        .right {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        .down {
+            grid-column: 2;
+            grid-row: 3;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 150px;
+        }
+
+        .action-btn {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-size: 18px;
+            user-select: none;
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .action-btn:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(0.95);
+        }
+
+        .turbo-btn {
+            background: rgba(255, 215, 0, 0.3);
+            border-color: #ffd700;
+        }
+
+        .restart-btn {
+            background: rgba(255, 0, 0, 0.3);
+            border-color: #ff4444;
+        }
+
+        /* Información del juego */
+        .game-info {
+            position: absolute;
+            top: 60px;
+            left: 10px;
+            color: white;
+            font-size: 14px;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px;
+            border-radius: 5px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Mensajes */
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 20;
+            display: none;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .message h2 {
+            color: #ff4444;
+            margin-bottom: 10px;
+        }
+
+        .message button {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-height: 700px) {
+            h1 {
+                font-size: 1.5rem;
+                margin: 5px 0;
+            }
+            
+            canvas {
+                height: calc(100vh - 160px);
+            }
+            
+            .controls-container {
+                height: 100px;
+            }
+            
+            .d-pad, .action-buttons {
+                width: 130px;
+            }
+            
+            .control-btn, .action-btn {
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+
+        @media (orientation: landscape) {
+            .game-container {
+                flex-direction: row;
+            }
+            
+            h1 {
+                position: absolute;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                z-index: 10;
+            }
+            
+            canvas {
+                height: calc(100vh - 20px);
+                margin-top: 20px;
+            }
+            
+            .controls-container {
+                position: absolute;
+                bottom: 10px;
+                left: 0;
+                right: 0;
+                height: auto;
+                padding: 5px;
+            }
+            
+            .d-pad {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .action-buttons {
+                flex-direction: row;
+                width: auto;
+                gap: 15px;
+            }
+            
+            .action-btn {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>CARRERAS 3D EXTREMO</h1>
+        
+        <div class="game-info">
+            <div>Velocidad: <span id="speed">0</span> km/h</div>
+            <div>Puntos: <span id="score">0</span></div>
+            <div>Vidas: <span id="lives">3</span></div>
+        </div>
+        
+        <canvas id="gameCanvas"></canvas>
+        
+        <div class="controls-container">
+            <div class="d-pad">
+                <div class="control-btn up" id="btn-up">↑</div>
+                <div class="control-btn left" id="btn-left">←</div>
+                <div class="control-btn center">DIRECCIÓN</div>
+                <div class="control-btn right" id="btn-right">→</div>
+                <div class="control-btn down" id="btn-down">↓</div>
+            </div>
+            
+            <div class="action-buttons">
+                <div class="action-btn turbo-btn" id="btn-turbo">TURBO</div>
+                <div class="action-btn restart-btn" id="btn-restart">REINICIAR</div>
+            </div>
+        </div>
+        
+        <div class="message" id="game-over-message">
+            <h2>GAME OVER</h2>
+            <p>Puntuación final: <span id="final-score">0</span></p>
+            <button id="restart-btn">JUGAR DE NUEVO</button>
+        </div>
+    </div>
+
+    <script>
+        // Configuración del juego
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Ajustar tamaño del canvas
+        function resizeCanvas() {
+            const container = document.querySelector('.game-container');
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight - 180;
+            
+            // Ajuste especial para orientación horizontal
+            if (window.innerHeight < window.innerWidth) {
+                canvas.height = container.clientHeight - 20;
+            }
+        }
+        
+        // Inicializar tamaño del canvas
+        window.addEventListener('load', resizeCanvas);
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('orientationchange', resizeCanvas);
+
+        // Colores
+        const SKY_BLUE = 'rgb(135, 206, 235)';
+        const ROAD_COLOR = 'rgb(50, 50, 50)';
+        const ROAD_MARKING = 'rgb(255, 255, 255)';
+        const GRASS_COLOR = 'rgb(34, 139, 34)';
+        const RED = 'rgb(255, 0, 0)';
+        const BLUE = 'rgb(0, 120, 255)';
+        const YELLOW = 'rgb(255, 215, 0)';
+        const BLACK = 'rgb(0, 0, 0)';
+        const WHITE = 'rgb(255, 255, 255)';
+
+        // Clase para el jugador
+        class PlayerCar {
+            constructor() {
+                this.width = 40;
+                this.height = 70;
+                this.reset();
+            }
+            
+            reset() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height - 100;
+                this.speed = 0;
+                this.maxSpeed = 10;
+                this.acceleration = 0.1;
+                this.deceleration = 0.2;
+                this.steering = 0;
+                this.maxSteering = 3;
+                this.color = RED;
+                this.score = 0;
+                this.lives = 3;
+            }
+
+            update(keys) {
+                // Aceleración y frenado
+                if (keys.up) {
+                    this.speed = Math.min(this.speed + this.acceleration, this.maxSpeed);
+                } else if (keys.down) {
+                    this.speed = Math.max(this.speed - this.deceleration * 2, -this.maxSpeed / 2);
+                } else {
+                    // Desaceleración natural
+                    if (this.speed > 0) {
+                        this.speed = Math.max(this.speed - this.deceleration / 2, 0);
+                    } else if (this.speed < 0) {
+                        this.speed = Math.min(this.speed + this.deceleration / 2, 0);
+                    }
+                }
+
+                // Dirección
+                if (keys.left) {
+                    this.steering = -this.maxSteering;
+                } else if (keys.right) {
+                    this.steering = this.maxSteering;
+                } else {
+                    this.steering = 0;
+                }
+
+                // Movimiento
+                this.x += this.steering * (this.speed / this.maxSpeed);
+
+                // Limitar el coche a la carretera
+                const roadLeft = canvas.width / 2 - 150;
+                const roadRight = canvas.width / 2 + 150;
+                this.x = Math.max(roadLeft + this.width / 2, Math.min(this.x, roadRight - this.width / 2));
+            }
+
+            draw() {
+                // Dibujar el coche del jugador
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+
+                // Detalles del coche
+                ctx.fillStyle = BLACK;
+                ctx.fillRect(this.x - this.width / 2 + 5, this.y - this.height / 2 + 5, this.width - 10, 15); // Ventana frontal
+                ctx.fillRect(this.x - this.width / 2 + 5, this.y + this.height / 2 - 20, this.width - 10, 15); // Ventana trasera
+                
+                ctx.fillStyle = YELLOW;
+                ctx.fillRect(this.x - this.width / 2 - 5, this.y - this.height / 2 + 10, 5, 10); // Luz izquierda
+                ctx.fillRect(this.x + this.width / 2, this.y - this.height / 2 + 10, 5, 10); // Luz derecha
+                
+                ctx.fillStyle = RED;
+                ctx.fillRect(this.x - this.width / 2 - 5, this.y + this.height / 2 - 20, 5, 10); // Luz trasera izquierda
+                ctx.fillRect(this.x + this.width / 2, this.y + this.height / 2 - 20, 5, 10); // Luz trasera derecha
+            }
+        }
+
+        // Clase para los coches enemigos
+        class EnemyCar {
+            constructor() {
+                this.width = 40;
+                this.height = 70;
+                this.lane = Math.floor(Math.random() * 3) - 1; // -1: izquierda, 0: centro, 1: derecha
+                this.x = canvas.width / 2 + this.lane * 50;
+                this.y = -this.height;
+                this.speed = Math.random() * 4 + 3;
+                this.colors = [BLUE, 'rgb(0, 200, 0)', 'rgb(200, 0, 200)', 'rgb(255, 165, 0)'];
+                this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+            }
+
+            update() {
+                this.y += this.speed;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+
+                // Detalles del coche enemigo
+                ctx.fillStyle = BLACK;
+                ctx.fillRect(this.x - this.width / 2 + 5, this.y - this.height / 2 + 5, this.width - 10, 15);
+                ctx.fillRect(this.x - this.width / 2 + 5, this.y + this.height / 2 - 20, this.width - 10, 15);
+            }
+        }
+
+        // Clase para efectos de partículas
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = Math.random() * 4 - 2;
+                this.vy = Math.random() * 4 - 2;
+                this.life = Math.floor(Math.random() * 20) + 20;
+                this.colors = [WHITE, YELLOW, 'rgb(200, 200, 200)'];
+                this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life--;
+            }
+
+            draw() {
+                const alpha = Math.min(1, this.life / 40);
+                const size = Math.max(1, this.life / 10);
+                
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Función para dibujar la carretera en perspectiva 3D
+        function drawRoad(playerSpeed) {
+            // Dibujar cielo
+            ctx.fillStyle = SKY_BLUE;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Dibujar pasto
+            ctx.fillStyle = GRASS_COLOR;
+            ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
+
+            // Dibujar carretera con perspectiva
+            const roadWidth = Math.min(300, canvas.width * 0.7);
+            const roadTopWidth = 100;
+
+            ctx.fillStyle = ROAD_COLOR;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2 - roadTopWidth / 2, 0);
+            ctx.lineTo(canvas.width / 2 + roadTopWidth / 2, 0);
+            ctx.lineTo(canvas.width / 2 + roadWidth / 2, canvas.height);
+            ctx.lineTo(canvas.width / 2 - roadWidth / 2, canvas.height);
+            ctx.closePath();
+            ctx.fill();
+
+            // Dibujar líneas de la carretera
+            const lineHeight = 50;
+            const lineSpacing = 100;
+            const lineWidth = 10;
+
+            for (let i = 0; i < canvas.height; i += lineSpacing) {
+                const yPos = (i - Date.now() / 10 % lineSpacing) % canvas.height;
+                
+                ctx.fillStyle = ROAD_MARKING;
+                ctx.beginPath();
+                ctx.moveTo(canvas.width / 2 - lineWidth / 2, yPos);
+                ctx.lineTo(canvas.width / 2 - lineWidth / 2, yPos + lineHeight);
+                ctx.lineTo(canvas.width / 2 + lineWidth / 2, yPos + lineHeight);
+                ctx.lineTo(canvas.width / 2 + lineWidth / 2, yPos);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        // Variables del juego
+        let player = new PlayerCar();
+        let enemyCars = [];
+        let particles = [];
+        let spawnTimer = 0;
+        let gameOver = false;
+        let turboAvailable = true;
+        let turboTimer = 0;
+
+        // Control de teclado táctil
+        const keys = {
+            up: false,
+            down: false,
+            left: false,
+            right: false
+        };
+
+        // Configurar controles táctiles
+        function setupTouchControls() {
+            // Botones de dirección
+            document.getElementById('btn-up').addEventListener('touchstart', (e) => {
+                keys.up = true;
+                e.preventDefault();
+            });
+            
+            document.getElementById('btn-up').addEventListener('touchend', (e) => {
+                keys.up = false;
+                e.preventDefault();
+            });
+            
+            document.getElementById('btn-down').addEventListener('touchstart', (e) => {
+                keys.down = true;
+                e.preventDefault();
+            });
+            
+            document.getElementById('btn-down').addEventListener('touchend', (e) => {
+                keys.down = false;
+                e.preventDefault();
+            });
+            
+            document.getElementById('btn-left').addEventListener('touchstart', (e) => {
+                keys.left = true;
+                e.preventDefault();
+            });
+            
+            document.getElementById('btn-left').addEventListener('touchend', (e) => {
+                keys.left = false;
+                e.preventDefault();
+            });
+            
+            document.getElementById('btn-right').addEventListener('touchstart', (e) => {
+                keys.right = true;
+                e.preventDefault();
+            });
+            
+            document.getElementById('btn-right').addEventListener('touchend', (e) => {
+                keys.right = false;
+                e.preventDefault();
+            });
+            
+            // Botón de turbo
+            document.getElementById('btn-turbo').addEventListener('touchstart', (e) => {
+                if (turboAvailable && !gameOver) {
+                    player.speed = player.maxSpeed * 1.5;
+                    turboAvailable = false;
+                    turboTimer = Date.now();
+
+                    // Crear partículas de turbo
+                    for (let i = 0; i < 30; i++) {
+                        particles.push(new Particle(player.x, player.y + player.height / 2));
+                    }
+                    
+                    // Feedback visual
+                    document.getElementById('btn-turbo').style.background = 'rgba(255, 215, 0, 0.6)';
+                    setTimeout(() => {
+                        if (!gameOver) {
+                            document.getElementById('btn-turbo').style.background = 'rgba(255, 215, 0, 0.3)';
+                        }
+                    }, 200);
+                }
+                e.preventDefault();
+            });
+            
+            // Botón de reinicio
+            document.getElementById('btn-restart').addEventListener('touchstart', (e) => {
+                resetGame();
+                e.preventDefault();
+            });
+            
+            // Botón de reinicio en mensaje de game over
+            document.getElementById('restart-btn').addEventListener('touchstart', (e) => {
+                resetGame();
+                document.getElementById('game-over-message').style.display = 'none';
+                e.preventDefault();
+            });
+            
+            // Prevenir eventos táctiles por defecto en controles
+            const controls = document.querySelectorAll('.control-btn, .action-btn');
+            controls.forEach(control => {
+                control.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                });
+            });
+        }
+
+        // Función para reiniciar el juego
+        function resetGame() {
+            player.reset();
+            enemyCars = [];
+            particles = [];
+            gameOver = false;
+            turboAvailable = true;
+            spawnTimer = 0;
+            document.getElementById('btn-turbo').style.background = 'rgba(255, 215, 0, 0.3)';
+        }
+
+        // Actualizar información en pantalla
+        function updateGameInfo() {
+            document.getElementById('speed').textContent = Math.abs(Math.floor(player.speed * 20));
+            document.getElementById('score').textContent = player.score;
+            document.getElementById('lives').textContent = player.lives;
+        }
+
+        // Bucle principal del juego
+        function gameLoop() {
+            // Limpiar canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!gameOver) {
+                // Actualizar jugador
+                player.update(keys);
+
+                // Generar coches enemigos
+                spawnTimer++;
+                if (spawnTimer >= 60) {
+                    enemyCars.push(new EnemyCar());
+                    spawnTimer = 0;
+                }
+
+                // Actualizar coches enemigos
+                for (let i = enemyCars.length - 1; i >= 0; i--) {
+                    const enemy = enemyCars[i];
+                    enemy.update();
+
+                    // Verificar colisiones
+                    if (Math.abs(player.x - enemy.x) < (player.width + enemy.width) / 2 &&
+                        Math.abs(player.y - enemy.y) < (player.height + enemy.height) / 2) {
+                        player.lives--;
+                        enemyCars.splice(i, 1);
+
+                        // Crear partículas de explosión
+                        for (let j = 0; j < 50; j++) {
+                            particles.push(new Particle(enemy.x, enemy.y));
+                        }
+
+                        if (player.lives <= 0) {
+                            gameOver = true;
+                            document.getElementById('final-score').textContent = player.score;
+                            document.getElementById('game-over-message').style.display = 'block';
+                        }
+                    }
+                    // Eliminar coches que salen de la pantalla
+                    else if (enemy.y > canvas.height + enemy.height) {
+                        enemyCars.splice(i, 1);
+                        player.score += 10;
+                    }
+                }
+
+                // Actualizar partículas
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    particles[i].update();
+                    if (particles[i].life <= 0) {
+                        particles.splice(i, 1);
+                    }
+                }
+
+                // Recargar turbo después de 5 segundos
+                if (!turboAvailable && Date.now() - turboTimer > 5000) {
+                    turboAvailable = true;
+                    document.getElementById('btn-turbo').style.background = 'rgba(255, 215, 0, 0.3)';
+                }
+            }
+
+            // Dibujar todo
+            drawRoad(player.speed);
+
+            // Dibujar coches enemigos
+            enemyCars.forEach(enemy => enemy.draw());
+
+            // Dibujar partículas
+            particles.forEach(particle => particle.draw());
+
+            // Dibujar jugador
+            player.draw();
+
+            // Actualizar información del juego
+            updateGameInfo();
+
+            // Mostrar turbo disponible
+            if (turboAvailable && !gameOver) {
+                ctx.font = '18px Arial';
+                ctx.fillStyle = YELLOW;
+                ctx.textAlign = 'center';
+                ctx.fillText('TURBO DISPONIBLE', canvas.width / 2, canvas.height - 30);
+            }
+
+            // Continuar el bucle
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Inicializar el juego
+        setupTouchControls();
+        resizeCanvas();
+        gameLoop();
+        
+        // Mensaje de bienvenida
+        setTimeout(() => {
+            alert("¡Bienvenido a Carreras 3D Extremo! Usa los controles táctiles para mover tu coche. Evita los coches enemigos y usa el turbo cuando esté disponible.");
+        }, 500);
+    </script>
+</body>
+</html>
