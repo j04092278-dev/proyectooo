@@ -3,26 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTU Virtual - Plataforma Educativa</title>
+    <title>GTU Tech Solutions - Servicios Técnicos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        .service-category {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .service-category.electronica {
+            border-left-color: #3498db;
+        }
+        
+        .service-category.programacion {
+            border-left-color: #e74c3c;
+        }
+        
+        .service-category.complementarios {
+            border-left-color: #27ae60;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .category-icon.electronica {
+            background: #3498db;
+        }
+        
+        .category-icon.programacion {
+            background: #e74c3c;
+        }
+        
+        .category-icon.complementarios {
+            background: #27ae60;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .service-card {
+            background: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .service-icon {
+            font-size: 28px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin: 15px 0;
+            padding: 0;
+        }
+        
+        .service-features li {
+            padding: 5px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .service-features li i {
+            color: var(--success-color);
+            margin-right: 8px;
+        }
+        
+        .price-tag {
+            background: var(--warning-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .contact-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            background: #c0392b;
+        }
+        
+        .service-tag {
+            background: var(--light-color);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            display: block;
+        }
+        
+        .testimonial {
+            background: var(--light-color);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .client-name {
+            font-weight: bold;
+            color: var(--dark-color);
+            margin-top: 15px;
+        }
+        
+        .client-position {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="platform-header">
         <div class="header-container">
             <a href="../index.html" class="logo">
-                <i class="fas fa-graduation-cap"></i>
-                <h1>GTU<span>Virtual</span></h1>
+                <i class="fas fa-microchip"></i>
+                <h1>GTU<span>Tech</span></h1>
             </a>
             <nav class="main-nav">
                 <ul>
                     <li><a href="#" class="active"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a href="#"><i class="fas fa-book"></i> Cursos</a></li>
-                    <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendario</a></li>
-                    <li><a href="#"><i class="fas fa-tasks"></i> Tareas</a></li>
-                    <li><a href="#"><i class="fas fa-chart-bar"></i> Calificaciones</a></li>
+                    <li><a href="#electronica"><i class="fas fa-bolt"></i> Electrónica</a></li>
+                    <li><a href="#programacion"><i class="fas fa-code"></i> Programación</a></li>
+                    <li><a href="#complementarios"><i class="fas fa-cogs"></i> Servicios</a></li>
+                    <li><a href="../contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
                     <li>
                         <a href="../index.html" class="home-btn">
                             <i class="fas fa-arrow-left"></i>
@@ -33,23 +233,23 @@
             </nav>
             <div class="user-actions">
                 <div class="search-box">
-                    <input type="text" placeholder="Buscar cursos...">
+                    <input type="text" placeholder="Buscar servicios...">
                     <button><i class="fas fa-search"></i></button>
                 </div>
                 <div class="user-menu user-menu-dropdown">
                     <div class="user-avatar">
-                        <img src="https://ui-avatars.com/api/?name=Estudiante+GTU&background=0e2a6c&color=fff" alt="Usuario">
+                        <img src="https://ui-avatars.com/api/?name=Cliente+GTU&background=3498db&color=fff" alt="Cliente">
                     </div>
                     <div class="user-info">
-                        <span class="user-name">Estudiante GTU</span>
+                        <span class="user-name">Cliente GTU</span>
                         <div class="dropdown">
                             <i class="fas fa-chevron-down"></i>
                             <div class="dropdown-content">
                                 <a href="#"><i class="fas fa-user"></i> Mi Perfil</a>
                                 <a href="#"><i class="fas fa-cog"></i> Configuración</a>
-                                <a href="#"><i class="fas fa-bell"></i> Notificaciones</a>
+                                <a href="#"><i class="fas fa-history"></i> Historial</a>
                                 <a href="../index.html"><i class="fas fa-external-link-alt"></i> Sitio Principal</a>
-                                <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                                <a href="#"><i class="fas fa-phone-alt"></i> Contactar</a>
                             </div>
                         </div>
                     </div>
@@ -69,260 +269,430 @@
                 </a>
                 <span class="separator">/</span>
                 <a href="#">
-                    <i class="fas fa-graduation-cap"></i>
-                    GTU Virtual
+                    <i class="fas fa-microchip"></i>
+                    GTU Tech Solutions
                 </a>
                 <span class="separator">/</span>
-                <span class="current">Panel Principal</span>
+                <span class="current">Servicios Técnicos</span>
             </nav>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="quick-actions">
-            <a href="../servicios/frontend.html" class="quick-action-btn">
-                <i class="fas fa-laptop-code"></i>
-                <div class="quick-action-content">
-                    <h4>Desarrollo Frontend</h4>
-                    <p>Ver proyectos de interfaces</p>
-                </div>
-            </a>
-            <a href="../servicios/fullstack.html" class="quick-action-btn">
-                <i class="fas fa-code"></i>
-                <div class="quick-action-content">
-                    <h4>Proyectos FullStack</h4>
-                    <p>Explorar sistemas completos</p>
-                </div>
-            </a>
-            <a href="../contacto.html" class="quick-action-btn">
-                <i class="fas fa-envelope"></i>
-                <div class="quick-action-content">
-                    <h4>Contacto</h4>
-                    <p>Comunícate con nosotros</p>
-                </div>
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h2>Soluciones Tecnológicas Integrales</h2>
+            <p>Especialistas en electrónica, programación y servicios técnicos complementarios</p>
+            <a href="../contacto.html" class="contact-btn" style="background: white; color: var(--primary-color); margin-top: 20px;">
+                <i class="fas fa-calendar-check"></i>
+                Solicitar Cotización
             </a>
         </div>
 
+        <!-- Quick Stats -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Proyectos Completados</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Clientes Satisfechos</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Soporte Técnico</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">3-5 días</span>
+                <span class="stat-label">Tiempo de Entrega</span>
+            </div>
+        </div>
+
         <div class="platform-main">
+            <!-- Content Area -->
+            <section class="content">
+                <!-- Servicios de Electrónica -->
+                <div id="electronica" class="service-category electronica">
+                    <div class="category-header">
+                        <div class="category-icon electronica">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h2>Servicios de Electrónica</h2>
+                            <p>Soluciones electrónicas profesionales para proyectos industriales y comerciales</p>
+                        </div>
+                    </div>
+                    
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <h3>Diseño de Circuitos</h3>
+                            <p>Diseño y simulación de circuitos electrónicos personalizados</p>
+                            
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> PCB Design</li>
+                                <li><i class="fas fa-check"></i> Simulación SPICE</li>
+                                <li><i class="fas fa-check"></i> Prototipado rápido</li>
+                                <li><i class="fas fa-check"></i> Análisis de señal</li>
+                            </ul>
+                            
+                            <span class="service-tag">Electrónica Analógica</span>
+                            <span class="service-tag">Digital</span>
+                            <span class="service-tag">Potencia</span>
+                            
+                            <div class="price-tag">Desde $1,500 MXN</div>
+                            <button class="contact-btn" onclick="location.href='../contacto.html'">
+                                <i class="fas fa-comments"></i>
+                                Solicitar Informes
+                            </button>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>Automatización Industrial</h3>
+                            <p>Sistemas de control automatizado para procesos industriales</p>
+                            
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> PLC Programming</li>
+                                <li><i class="fas fa-check"></i> Sensores y Actuadores</li>
+                                <li><i class="fas fa-check"></i> SCADA Systems</li>
+                                <li><i class="fas fa-check"></i> IoT Integration</li>
+                            </ul>
+                            
+                            <span class="service-tag">PLC</span>
+                            <span class="service-tag">IoT</span>
+                            <span class="service-tag">SCADA</span>
+                            
+                            <div class="price-tag">Desde $5,000 MXN</div>
+                            <button class="contact-btn" onclick="location.href='../contacto.html'">
+                                <i class="fas fa-comments"></i>
+                                Solicitar Informes
+                            </button>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3>Reparación y Mantenimiento</h3>
+                            <p>Servicio técnico especializado para equipos electrónicos</p>
+                            
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Diagnóstico gratuito</li>
+                                <li><i class="fas fa-check"></i> Reparación garantizada</li>
+                                <li><i class="fas fa-check"></i> Mantenimiento preventivo</li>
+                                <li><i class="fas fa-check"></i> Calibración de equipos</li>
+                            </ul>
+                            
+                            <span class="service-tag">Reparación</span>
+                            <span class="service-tag">Mantenimiento</span>
+                            <span class="service-tag">Calibración</span>
+                            
+                            <div class="price-tag">Desde $800 MXN</div>
+                            <button class="contact-btn" onclick="location.href='../contacto.html'">
+                                <i class="fas fa-comments"></i>
+                                Solicitar Informes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicios de Programación -->
+                <div id="programacion" class="service-category programacion">
+                    <div class="category-header">
+                        <div class="category-icon programacion">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div>
+                            <h2>Servicios de Programación</h2>
+                            <p>Desarrollo de software a medida para todo tipo de necesidades</p>
+                        </div>
+                    </div>
+                    
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3>Desarrollo Web</h3>
+                            <p>Sitios web y aplicaciones web modernas y responsivas</p>
+                            
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Frontend (React, Vue)</li>
+                                <li><i class="fas fa-check"></i> Backend (Node.js, Python)</li>
+                                <li><i class="fas fa-check"></i> E-commerce</li>
+                                <li><i class="fas fa-check"></i> Web Apps</li>
+                            </ul>
+                            
+                            <span class="service-tag">Frontend</span>
+                            <span class="service-tag">Backend</span>
+                            <span class="service-tag">FullStack</span>
+                            
+                            <div class="price-tag">Desde $3,000 MXN</div>
+                            <button class="contact-btn" onclick="location.href='../contacto.html'">
+                                <i class="fas fa-comments"></i>
+                                Solicitar Informes
+                            </button>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>Aplicaciones Móviles</h3>
+                            <p>Apps nativas e híbridas para iOS y Android</p>
+                            
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> React Native</li>
+                                <li><i class="fas fa-check"></i> Flutter</li>
+                                <li><i class="fas fa-check"></i> iOS (Swift)</li>
+                                <li><i class="fas fa-check"></i> Android (Kotlin)</li>
+                            </ul>
+                            
+                            <span class="service-tag">iOS</span>
+                            <span class="service-tag">Android</span>
+                            <span class="service-tag">Híbridas</span>
+                            
+                            <div class="price-tag">Desde $8,000 MXN</div>
+                            <button class="contact-btn" onclick="location.href='../contacto.html'">
+                                <i class="fas fa-comments"></i>
+                                Solicitar Informes
+                            </button>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3>Sistemas de Gestión</h3>
+                            <p>Software empresarial para optimizar procesos</p>
+                            
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> CRM Personalizado</li>
+                                <li><i class="fas fa-check"></i> ERP Systems</li>
+                                <li><i class="fas fa-check"></i> Base de datos</li>
+                                <li><i class="fas fa-check"></i> Reportes automáticos</li>
+                            </ul>
+                            
+                            <span class="service-tag">CRM</span>
+                            <span class="service-tag">ERP</span>
+                            <span class="service-tag">Gestión</span>
+                            
+                            <div class="price-tag">Desde $12,000 MXN</div>
+                            <button class="contact-btn" onclick="location.href='../contacto.html'">
+                                <i class="fas fa-comments"></i>
+                                Solicitar Informes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicios Complementarios -->
+                <div id="complementarios" class="service-category complementarios">
+                    <div class="category-header">
+                        <div class="category-icon complementarios">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div>
+                            <h2>Servicios Complementarios</h2>
+                            <p>Servicios técnicos adicionales para complementar tus proyectos</p>
+                        </div>
+                    </div>
+                    
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h3>Redes y Conectividad</h3>
+                            <p>Instalación y configuración de redes empresariales</p>
+                            
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Cableado estructurado</li>
+                                <li><i class="fas fa-check"></i> Wi-Fi empresarial</li>
+                                <li><i class="fas fa-check"></i> VPN Configuration</li>
+                                <li><i class="fas fa-check"></i> Seguridad de red</li>
+                            </ul>
+                            
+                            <span class="service-tag">Redes</span>
+                            <span class="service-tag">Wi-Fi</span>
+                            <span class="service-tag">Seguridad</span>
+                            
+                            <div class="price-tag">Desde $2,500 MXN</div>
+                            <button class="contact-btn" onclick="location.href='../contacto.html'">
+                                <i class="fas fa-comments"></i>
+                                Solicitar Informes
+                            </button>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Ciberseguridad</h3>
+                            <p>Protección de sistemas y datos contra amenazas digitales</p>
+                            
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Auditoría de seguridad</li>
+                                <li><i class="fas fa-check"></i> Pentesting</li>
+                                <li><i class="fas fa-check"></i> Firewall configuration</li>
+                                <li><i class="fas fa-check"></i> Capacitación</li>
+                            </ul>
+                            
+                            <span class="service-tag">Seguridad</span>
+                            <span class="service-tag">Pentesting</span>
+                            <span class="service-tag">Firewall</span>
+                            
+                            <div class="price-tag">Desde $4,000 MXN</div>
+                            <button class="contact-btn" onclick="location.href='../contacto.html'">
+                                <i class="fas fa-comments"></i>
+                                Solicitar Informes
+                            </button>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <h3>Capacitación Técnica</h3>
+                            <p>Formación especializada para tu equipo</p>
+                            
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Cursos personalizados</li>
+                                <li><i class="fas fa-check"></i> Workshops prácticos</li>
+                                <li><i class="fas fa-check"></i> Certificación</li>
+                                <li><i class="fas fa-check"></i> Material didáctico</li>
+                            </ul>
+                            
+                            <span class="service-tag">Capacitación</span>
+                            <span class="service-tag">Workshops</span>
+                            <span class="service-tag">Certificación</span>
+                            
+                            <div class="price-tag">Desde $500 MXN/persona</div>
+                            <button class="contact-btn" onclick="location.href='../contacto.html'">
+                                <i class="fas fa-comments"></i>
+                                Solicitar Informes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonios -->
+                <div class="section-title">
+                    <h3>Clientes Satisfechos</h3>
+                </div>
+
+                <div class="testimonial">
+                    <i class="fas fa-quote-left" style="color: var(--accent-color); font-size: 24px; margin-bottom: 15px;"></i>
+                    <p>"GTU Tech Solutions desarrolló un sistema de automatización para nuestra fábrica que aumentó nuestra productividad en un 40%. Profesionales altamente capacitados y atención excelente."</p>
+                    <div class="client-name">Ing. Roberto Martínez</div>
+                    <div class="client-position">Director de Operaciones, Industrias Metálicas S.A.</div>
+                </div>
+
+                <div class="testimonial">
+                    <i class="fas fa-quote-left" style="color: var(--accent-color); font-size: 24px; margin-bottom: 15px;"></i>
+                    <p>"El equipo de programación creó nuestra aplicación móvil en tiempo récord. La calidad del código y la interfaz de usuario superaron nuestras expectativas. ¡Totalmente recomendados!"</p>
+                    <div class="client-name">Dra. Laura Sánchez</div>
+                    <div class="client-position">CEO, Salud Digital México</div>
+                </div>
+            </section>
+
             <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="sidebar-section">
-                    <h3><i class="fas fa-book-open"></i> Mis Cursos</h3>
+                    <h3><i class="fas fa-star"></i> Servicios Destacados</h3>
                     <ul class="course-list">
                         <li>
-                            <i class="fas fa-laptop-code"></i>
-                            <span>Programación Web</span>
+                            <i class="fas fa-robot" style="color: #3498db;"></i>
+                            <span>Automatización Industrial</span>
                         </li>
                         <li>
-                            <i class="fas fa-database"></i>
-                            <span>Bases de Datos</span>
+                            <i class="fas fa-mobile-alt" style="color: #e74c3c;"></i>
+                            <span>Apps Móviles</span>
                         </li>
                         <li>
-                            <i class="fas fa-calculator"></i>
-                            <span>Matemáticas Discretas</span>
+                            <i class="fas fa-shield-alt" style="color: #27ae60;"></i>
+                            <span>Ciberseguridad</span>
                         </li>
                         <li>
-                            <i class="fas fa-network-wired"></i>
-                            <span>Redes de Computadoras</span>
+                            <i class="fas fa-network-wired" style="color: #f39c12;"></i>
+                            <span>Redes Empresariales</span>
                         </li>
                         <li>
-                            <i class="fas fa-chart-line"></i>
-                            <span>Estadística Aplicada</span>
+                            <i class="fas fa-tools" style="color: #9b59b6;"></i>
+                            <span>Reparación Electrónica</span>
                         </li>
                     </ul>
                 </div>
                 
                 <div class="sidebar-section">
-                    <h3><i class="fas fa-calendar-check"></i> Próximas Actividades</h3>
+                    <h3><i class="fas fa-calendar-check"></i> Proceso de Trabajo</h3>
                     <ul class="activity-list">
                         <li>
-                            <div class="activity-date">
-                                <span class="day">15</span>
-                                <span class="month">OCT</span>
+                            <div class="activity-date" style="background: #3498db;">
+                                <span class="day">1</span>
                             </div>
                             <div class="activity-info">
-                                <span class="activity-title">Examen Parcial</span>
-                                <span class="activity-course">Programación Web</span>
+                                <span class="activity-title">Consulta Inicial</span>
+                                <span class="activity-course">Evaluación de necesidades</span>
                             </div>
                         </li>
                         <li>
-                            <div class="activity-date">
-                                <span class="day">18</span>
-                                <span class="month">OCT</span>
+                            <div class="activity-date" style="background: #e74c3c;">
+                                <span class="day">2</span>
                             </div>
                             <div class="activity-info">
-                                <span class="activity-title">Entrega Proyecto</span>
-                                <span class="activity-course">Bases de Datos</span>
+                                <span class="activity-title">Cotización</span>
+                                <span class="activity-course">Propuesta detallada</span>
                             </div>
                         </li>
                         <li>
-                            <div class="activity-date">
-                                <span class="day">22</span>
-                                <span class="month">OCT</span>
+                            <div class="activity-date" style="background: #27ae60;">
+                                <span class="day">3</span>
                             </div>
                             <div class="activity-info">
-                                <span class="activity-title">Presentación</span>
-                                <span class="activity-course">Redes de Computadoras</span>
+                                <span class="activity-title">Desarrollo</span>
+                                <span class="activity-course">Implementación</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="activity-date" style="background: #f39c12;">
+                                <span class="day">4</span>
+                            </div>
+                            <div class="activity-info">
+                                <span class="activity-title">Entrega</span>
+                                <span class="activity-course">+ Capacitación</span>
                             </div>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Enlaces rápidos al sitio principal -->
+                <!-- Enlaces rápidos -->
                 <div class="sidebar-section">
                     <h3><i class="fas fa-external-link-alt"></i> Enlaces Rápidos</h3>
                     <ul class="course-list">
                         <li>
                             <i class="fas fa-home"></i>
-                            <a href="../index.html" style="color: inherit; text-decoration: none;">Inicio Systems Inovations</a>
+                            <a href="../index.html" style="color: inherit; text-decoration: none;">Inicio Principal</a>
                         </li>
                         <li>
-                            <i class="fas fa-code"></i>
-                            <a href="../servicios/frontend.html" style="color: inherit; text-decoration: none;">Proyecto Morse</a>
+                            <i class="fas fa-file-contract"></i>
+                            <a href="../contacto.html" style="color: inherit; text-decoration: none;">Solicitar Cotización</a>
                         </li>
                         <li>
-                            <i class="fas fa-robot"></i>
-                            <a href="../servicios/fullstack.html" style="color: inherit; text-decoration: none;">Control por Gestos</a>
+                            <i class="fas fa-phone-alt"></i>
+                            <a href="tel:+525551234567" style="color: inherit; text-decoration: none;">Llamar Ahora</a>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
-                            <a href="../contacto.html" style="color: inherit; text-decoration: none;">Contacto</a>
+                            <a href="mailto:servicios@gtutech.com" style="color: inherit; text-decoration: none;">Email Rápido</a>
                         </li>
                     </ul>
                 </div>
             </aside>
-
-            <!-- Content Area -->
-            <section class="content">
-                <!-- Welcome Banner -->
-                <div class="welcome-banner">
-                    <div class="welcome-text">
-                        <h2>¡Bienvenido a GTU Virtual!</h2>
-                        <p>Plataforma educativa desarrollada con Python y tecnologías modernas</p>
-                    </div>
-                    <div class="welcome-stats">
-                        <div class="stat">
-                            <span class="stat-number">5</span>
-                            <span class="stat-label">Cursos Activos</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">3</span>
-                            <span class="stat-label">Tareas Pendientes</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">12</span>
-                            <span class="stat-label">Días hasta exámenes</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Courses Grid -->
-                <div class="section-title">
-                    <h3>Mis Cursos en Progreso</h3>
-                    <a href="#" class="view-all">Ver todos los cursos <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="courses-grid">
-                    <div class="course-card">
-                        <div class="course-header" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
-                            <i class="fas fa-laptop-code"></i>
-                            <h4>Programación Web</h4>
-                        </div>
-                        <div class="course-info">
-                            <p>Desarrollo de aplicaciones web modernas utilizando las últimas tecnologías del frontend y backend.</p>
-                            <div class="course-progress">
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: 65%;"></div>
-                                </div>
-                                <span>65% Completado</span>
-                            </div>
-                            <div class="course-actions">
-                                <button class="btn-primary">Continuar Aprendiendo</button>
-                                <button class="btn-secondary">Ver Contenido</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="course-card">
-                        <div class="course-header" style="background: linear-gradient(135deg, #10b981, #047857);">
-                            <i class="fas fa-database"></i>
-                            <h4>Bases de Datos</h4>
-                        </div>
-                        <div class="course-info">
-                            <p>Diseño e implementación de bases de datos relacionales y no relacionales para aplicaciones modernas.</p>
-                            <div class="course-progress">
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: 40%;"></div>
-                                </div>
-                                <span>40% Completado</span>
-                            </div>
-                            <div class="course-actions">
-                                <button class="btn-primary">Continuar Aprendiendo</button>
-                                <button class="btn-secondary">Ver Contenido</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="course-card">
-                        <div class="course-header" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                            <i class="fas fa-calculator"></i>
-                            <h4>Matemáticas Discretas</h4>
-                        </div>
-                        <div class="course-info">
-                            <p>Fundamentos matemáticos esenciales para la ciencia de la computación y desarrollo de algoritmos.</p>
-                            <div class="course-progress">
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: 75%;"></div>
-                                </div>
-                                <span>75% Completado</span>
-                            </div>
-                            <div class="course-actions">
-                                <button class="btn-primary">Continuar Aprendiendo</button>
-                                <button class="btn-secondary">Ver Contenido</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Activities -->
-                <div class="section-title">
-                    <h3>Actividad Reciente</h3>
-                </div>
-
-                <div class="activities-timeline">
-                    <div class="activity-item">
-                        <div class="activity-icon">
-                            <i class="fas fa-file-upload"></i>
-                        </div>
-                        <div class="activity-content">
-                            <h4>Nueva tarea asignada</h4>
-                            <p>Se ha publicado una nueva tarea para el curso de Programación Web sobre desarrollo de interfaces responsivas.</p>
-                            <span class="activity-time">Hace 2 horas</span>
-                        </div>
-                    </div>
-
-                    <div class="activity-item">
-                        <div class="activity-icon">
-                            <i class="fas fa-comment"></i>
-                        </div>
-                        <div class="activity-content">
-                            <h4>Nuevo mensaje en el foro</h4>
-                            <p>El profesor ha respondido a tu pregunta sobre normalización de bases de datos en el foro de Bases de Datos.</p>
-                            <span class="activity-time">Hace 5 horas</span>
-                        </div>
-                    </div>
-
-                    <div class="activity-item">
-                        <div class="activity-icon">
-                            <i class="fas fa-video"></i>
-                        </div>
-                        <div class="activity-content">
-                            <h4>Nueva clase disponible</h4>
-                            <p>Se ha publicado una nueva clase grabada sobre teoría de grafos para Matemáticas Discretas.</p>
-                            <span class="activity-time">Ayer a las 15:30</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     </main>
 
@@ -335,8 +705,8 @@
     <footer class="platform-footer">
         <div class="footer-container">
             <div class="footer-section">
-                <h4>GTU Virtual</h4>
-                <p>Plataforma de aprendizaje en línea para la comunidad educativa del Grupo Tecnológico Universitario.</p>
+                <h4>GTU Tech Solutions</h4>
+                <p>Soluciones tecnológicas integrales en electrónica, programación y servicios técnicos complementarios.</p>
                 <div class="social-links">
                     <a href="https://www.facebook.com/share/1FVoF53Djz/"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -345,38 +715,65 @@
                 </div>
             </div>
             <div class="footer-section">
-                <h4>Enlaces Rápidos</h4>
+                <h4>Servicios Principales</h4>
                 <ul>
-                    <li><a href="../index.html"><i class="fas fa-chevron-right"></i> Inicio Principal</a></li>
-                    <li><a href="../servicios/frontend.html"><i class="fas fa-chevron-right"></i> Proyecto Morse</a></li>
-                    <li><a href="../servicios/fullstack.html"><i class="fas fa-chevron-right"></i> Control por Gestos</a></li>
-                    <li><a href="../contacto.html"><i class="fas fa-chevron-right"></i> Contacto</a></li>
+                    <li><a href="#electronica"><i class="fas fa-chevron-right"></i> Electrónica</a></li>
+                    <li><a href="#programacion"><i class="fas fa-chevron-right"></i> Programación</a></li>
+                    <li><a href="#complementarios"><i class="fas fa-chevron-right"></i> Servicios Complementarios</a></li>
+                    <li><a href="../contacto.html"><i class="fas fa-chevron-right"></i> Cotizaciones</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>Soporte Técnico</h4>
                 <ul>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contactar Soporte</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Reportar Problema</a></li>
+                    <li><a href="tel:+525551234567"><i class="fas fa-phone"></i> +52 555 123 4567</a></li>
+                    <li><a href="mailto:soporte@gtutech.com"><i class="fas fa-envelope"></i> soporte@gtutech.com</a></li>
+                    <li><a href="../contacto.html"><i class="fas fa-calendar-check"></i> Agenda una cita</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Información de Contacto</h4>
+                <h4>Horarios de Atención</h4>
                 <ul class="contact-info">
-                    <li><i class="fas fa-map-marker-alt"></i> Av. Universidad 123, Ciudad GTU</li>
-                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                    <li><i class="fas fa-envelope"></i> soporte@gtuvirtual.edu</li>
-                    <li><i class="fas fa-clock"></i> Lunes a Viernes: 8:00 - 18:00</li>
+                    <li><i class="fas fa-clock"></i> Lunes a Viernes: 9:00 - 19:00</li>
+                    <li><i class="fas fa-clock"></i> Sábados: 10:00 - 14:00</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Av. Tecnología 456, Ciudad GTU</li>
+                    <li><i class="fas fa-shipping-fast"></i> Servicio a domicilio disponible</li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 GTU Virtual. Todos los derechos reservados. | 
+            <p>&copy; 2024 GTU Tech Solutions. Todos los derechos reservados. | 
                <a href="../index.html" style="color: #60a5fa; text-decoration: none;">Systems Inovations</a> | 
-               Plataforma desarrollada con ❤️ para la educación</p>
+               Soluciones tecnológicas con garantía de calidad</p>
         </div>
     </footer>
+
+    <script>
+        // Smooth scroll para navegación interna
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Simulación de búsqueda
+        document.querySelector('.search-box button').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-box input').value;
+            if(searchTerm.trim()) {
+                alert(`Buscando servicios relacionados con: "${searchTerm}"`);
+            }
+        });
+    </script>
 </body>
 </html>
